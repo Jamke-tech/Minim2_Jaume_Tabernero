@@ -1,6 +1,7 @@
 package com.example.minim2.models;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,41 +18,42 @@ import java.util.List;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
-    List<User> followerlist;
+    List<Repo> reposList;
     Context context;
 
-    public MyAdapter(Context ct, List<User> Users) {
+    public MyAdapter(Context ct, List<Repo> reposList) {
         context =ct;
-        followerlist=Users;
+        this.reposList=reposList;
     }
 
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view =inflater.inflate(R.layout.my_row,parent,false);
+        View view =inflater.inflate(R.layout.my_repos_row,parent,false);
         return new MyViewHolder(view);
 
     }
 
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
 
-        holder.nameText.setText(followerlist.get(position).getLogin());
-        Picasso.get().load(followerlist.get(position).getAvatar_url()).into(holder.myImage);
+        holder.textNameRepo.setText(reposList.get(position).getName());
+        holder.textLanguageName.setText(reposList.get(position).getLanguage());
 
     }
 
     public int getItemCount() {
-        return followerlist.size();
+        return reposList.size();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-        TextView nameText;
-        ImageView myImage;
+        TextView textNameRepo;
+        TextView textLanguageName;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            nameText = (TextView) itemView.findViewById(R.id.followerName);
-            myImage = (ImageView) itemView.findViewById(R.id.imageFollower);
+            textNameRepo = (TextView) itemView.findViewById(R.id.textNameRepo);
+            textLanguageName = (TextView) itemView.findViewById(R.id.textNameLang);
+
         }
     }
 }
